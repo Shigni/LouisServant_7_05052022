@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://kit.fontawesome.com/8b5139178a.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image" href="assets/favicon.png" />
+    <title>Les petits plats</title>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="assets/logo.svg" alt="Les petits plats">
+        </a>
+
+        <div class="search_bar">
+            <div id="result_search"></div>
+            <small id="error" class="hidden"></small>
+            <input id="main_search_bar" type="text" placeholder="Rechercher une recette">
+            <div class="fas fa-search"></div>
+        </div>
+
+        <div id="tag_array"></div>
+
+        <div class="filter_container">
+            <section class="filter">
+                <div class="filter_button">
+                    <div class="filter_select">
+                        <div class="btn_section">
+                            <a href="#" id="btn_ingredient" role="button" class=" ingredient filter_select_trigger tag_container blue"  aria-haspopup="listbox" aria-label="Trier par" aria-expanded="false">
+                                <span>Ingrédients</span><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-up"></i>
+                                <form>
+                                    <input id="search_input_ingredient" type="search" class="hidden tag_input" placeholder="Chercher un ingrédient">
+                                    
+                                </form>
+                                
+                            </a>
+                            <ul class="tag_content blue"></ul>
+                        </div>
+                        <div class="btn_section">
+                            <a href="#" id="btn_appareil" role="button" class="appareil filter_select_trigger tag_container green"  aria-haspopup="listbox" aria-label="Trier par" aria-expanded="false">
+                                <span>Appareils</span><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-up"></i>
+                                <form>
+                                    <input id="search_input_appareil" type="search" class="hidden tag_input" placeholder="Chercher un appareil">
+                                </form>
+                            </a>
+                            <ul class="green tag_content"></ul>
+                        </div>
+                        <div class="btn_section">
+                            <a href="#" id="btn_ustensil" role="button" class="ustensiles filter_select_trigger tag_container red"  aria-haspopup="listbox" aria-label="Trier par" aria-expanded="false">
+                                <span>Ustensiles</span><i class="arrow fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-up"></i>
+                                <form>
+                                    <input id="search_input_ustensil" type="search" class="hidden tag_input" placeholder="Chercher un ustensile">
+                                </form>
+                            </a>
+                            <ul class="red tag_content"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <main id="main">
+        <div id="recipe_container">
+            
+        </div>
+
+    </main>
+
+    <script src="scripts/index.js" type="module"></script>
+</body>
+</html>
