@@ -3,7 +3,6 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-/** Logo **/
 
 header img {
     width: 300px;
@@ -13,7 +12,6 @@ header img {
     margin-bottom: 2rem;
 }
 
-/** search bar **/
 
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
@@ -190,7 +188,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     display: none;
 }
 
-/*ul active*/
 
 .ul_active {
     opacity: 1;
@@ -214,7 +211,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     background-color: #3282F7;
 }
 
-/** Main ( recipe ) **/ 
 
 #recipe_container{ 
     display: grid;
