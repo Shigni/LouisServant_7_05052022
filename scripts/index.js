@@ -82,38 +82,32 @@ function inputValidation(value) {
         return valid
     }
 };
-
-function search(arr, value) {
-    foundArray = []
-    for(let i=0; i < arr.length; i++) {
+//algo
+function search(recipeArrays, value) {
+    const foundArray = recipeArrays.filter((recipeArray) => {
         function listIngredient(){
             let x = ""
-            arr[i].ingredients.forEach(ingredient => {
-                x += ingredient.ingredient + ' '
+            recipeArray.ingredients.forEach(ingredient => {
+                x += ingredient.ingredient.toLowerCase() + ' '
             });
             return x
         } 
         
         function listUstensil(){
             let y = ""
-            arr[i].ustensils.forEach(ustensil=> {
-                y += ustensil
-            })
+            recipeArray.ustensils.forEach(ustensil => {
+                y += ustensil.toLowerCase() + ' '
+            });
             return y
         }
-        let recipeTemp = arr[i].name + " , " +
-                         listIngredient() + " , " +
-                         arr[i].description +
-                         arr[i].appliance + " , " +
-                         listUstensil()
-        
-        recipeTemp = recipeTemp.toLowerCase()
-        recipeTemp = recipeTemp.trim()
-        let foundBoolean = recipeTemp.includes(value)
-        if(foundBoolean === true) {
-            foundArray.push(arr[i])
-        }
-    } 
+
+        return recipeArray.name.toLowerCase().includes(value) ||
+        recipeArray.description.toLowerCase().includes(value) ||
+        listIngredient().includes(value) ||
+        listUstensil().includes(value) ||
+        recipeArray.appliance.toLowerCase().includes(value)
+    });
+
     
     if(foundArray.length > 0){
         recipeContainer.innerHTML = ""
