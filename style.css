@@ -211,6 +211,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     background-color: #3282F7;
 }
 
+#errorMessage{
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 5%;
+}
 
 #recipe_container{ 
     display: grid;

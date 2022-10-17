@@ -9,6 +9,8 @@ const recipeContainer = document.getElementById("recipe_container")
 const tagContainer = document.querySelectorAll(".tag_container")
 const tagArray = document.getElementById("tag_array")
 const errorText = document.getElementById("error")
+const mainContainer = document.getElementById("main")
+
 
 let ingredients = []
 let ingredientsArr = []
@@ -116,7 +118,7 @@ function search(recipeArrays, value) {
         ustensilsFilter(foundArray)
         createRecipe(foundArray)
     } else {
-        recipeContainer.innerText = "Aucune recette ne correspond à votre critère...vous pouvez chercher 'tarte aux pommes', 'poisson'. etc" 
+        mainContainer.innerHTML = `<span id="errorMessage">Aucune recette ne correspond à votre critère...vous pouvez chercher 'tarte aux pommes', 'poisson'. etc </span>`
     }
 
     foundArrayTemp = foundArray
