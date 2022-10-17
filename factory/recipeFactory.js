@@ -33,10 +33,11 @@ export default class recipeClass {
     }
 
     createIngredient() {
-        return `
-        ${this.ingredients.map(function(eachIngredient){
+        return this.ingredients.map(function(eachIngredient){
+
             let unit = eachIngredient.unit
             let quantity = eachIngredient.quantity
+
                 function quantityCheck(){
                     if(quantity === undefined){
                         quantity = ""
@@ -45,35 +46,31 @@ export default class recipeClass {
                         return quantity
                     }
                 }
+                
                 function unitCheck(){
                     if(unit === undefined){
                         unit = ""
                         return unit
-                    } else if(unit === "grammes"){
+                    } else if(unit === "grammes")
                         return "g"
-                    } else if (unit === "cuillères à soupe"){
+                    else if (unit === "cuillères à soupe" || unit === "cuillères à café")
                         return "cuillères"
-                    } else if (unit === "cuillère à soupe"){
+                
+                    else if (unit === "cuillère à soupe" || unit === "cuillère à café")
                         return "cuillère"
-                    } else if (unit === "cuillères à café"){
-                        return "cuillères"
-                    } else if (unit === "cuillère à café"){
-                        return "cuillère"
-                    }
-                    else {
+                    else
                         return unit
-                    }
                 }
+
                 function colonAdd(){
-                    if(unit || quantity){
-                        return ":"
-                    } else {
-                        return ""
-                    }
+                    // if(unit || quantity)
+                    //     return ":"
+                    // else 
+                    //     return ""
+
+                    return (unit || quantity) ?  ':' : ''
                 }
-            return ` <li> ${eachIngredient.ingredient} ${colonAdd()} ${quantityCheck()} ${unitCheck()} </li>
-            `
+
+            return `<li> ${eachIngredient.ingredient} ${colonAdd()} ${quantityCheck()} ${unitCheck()} </li>`
         }).join('')}
-        `
     }
-}
