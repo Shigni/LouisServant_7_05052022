@@ -63,11 +63,6 @@ export default class recipeClass {
                 }
 
                 function colonAdd(){
-                    // if(unit || quantity)
-                    //     return ":"
-                    // else 
-                    //     return ""
-
                     return (unit || quantity) ?  ':' : ''
                 }
 
