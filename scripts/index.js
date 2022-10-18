@@ -86,22 +86,27 @@ function inputValidation(value) {
 
 function search(arr, value) {
     foundArray = []
+
     for(let i=0; i < arr.length; i++) {
+
         function listIngredient(){
             let x = ""
-            arr[i].ingredients.forEach(ingredient => {
-                x += ingredient.ingredient + ' '
-            });
+            const ingredientList = arr[i].ingredients
+            for (let i = 0; i < ingredientList.length; i++) {
+                x += ingredientList[i].ingredient + ' '
+            };
             return x
         } 
         
         function listUstensil(){
             let y = ""
-            arr[i].ustensils.forEach(ustensil=> {
-                y += ustensil
-            })
+            const ustensilList = arr[i].ustensils
+            for (let i = 0; i < ustensilList.length; i++) {
+                y += ustensilList[i].ustensils + ' '
+            };
             return y
         }
+
         let recipeTemp = arr[i].name + " , " +
                          listIngredient() + " , " +
                          arr[i].description +
@@ -110,8 +115,8 @@ function search(arr, value) {
         
         recipeTemp = recipeTemp.toLowerCase()
         recipeTemp = recipeTemp.trim()
-        let foundBoolean = recipeTemp.includes(value)
-        if(foundBoolean === true) {
+        let isFound = recipeTemp.includes(value)
+        if(isFound === true) {
             foundArray.push(arr[i])
         }
     } 
@@ -123,7 +128,7 @@ function search(arr, value) {
         ustensilsFilter(foundArray)
         createRecipe(foundArray)
     } else {
-        mainContainer.innerHTML = `<span id="errorMessage">Aucune recette ne correspond à votre critère...vous pouvez chercher 'tarte aux pommes', 'poisson'. etc </span>`
+        recipeContainer.innerHTML = `<span id="errorMessage">Aucune recette ne correspond à votre critère...vous pouvez chercher 'tarte aux pommes', 'poisson'. etc </span>`
     }
 
     foundArrayTemp = foundArray
