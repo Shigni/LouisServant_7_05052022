@@ -155,6 +155,7 @@ searchInput.addEventListener("input", (e) => {
     if (valid === false) {
         return
     }
+    
     search(recipes, searchWord)
 })
 
