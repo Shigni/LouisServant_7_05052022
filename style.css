@@ -79,6 +79,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     height: 4rem;
     border-radius: 5px;
     margin-top: 1.2rem;
+    cursor: pointer;
 }
 
 .filter_select_trigger span {
