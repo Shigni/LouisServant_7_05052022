@@ -53,11 +53,11 @@ export default class recipeClass {
                         return unit
                     } else if(unit === "grammes")
                         return "g"
-                    else if (unit === "cuillères à soupe" || unit === "cuillères à café")
-                        return "cuillères"
+                    else if (unit === "cuillères à soupe" || unit === "cuillère à soupe")
+                        return "CaS"
                 
-                    else if (unit === "cuillère à soupe" || unit === "cuillère à café")
-                        return "cuillère"
+                    else if (unit === "cuillères à café" || unit === "cuillère à café")
+                        return "CaC"
                     else
                         return unit
                 }

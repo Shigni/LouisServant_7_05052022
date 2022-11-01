@@ -271,6 +271,7 @@ h4 i {
     margin-right: 0.8rem;
     text-overflow: ellipsis;
     overflow: hidden;
+    line-height: 2.5ex;
 }
 
 .ingredients {
@@ -279,6 +280,7 @@ h4 i {
     padding-left: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 2.5ex;
 }
 
 ul {
