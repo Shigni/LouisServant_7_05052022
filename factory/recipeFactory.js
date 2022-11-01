@@ -53,6 +53,8 @@ export default class recipeClass {
                         return unit
                     } else if(unit === "grammes")
                         return "g"
+                    else if(unit === "litres" || unit === "litre")
+                    return "L"
                     else if (unit === "cuillères à soupe" || unit === "cuillère à soupe")
                         return "CaS"
                 
