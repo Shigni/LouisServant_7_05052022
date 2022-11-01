@@ -148,11 +148,10 @@ searchInput.addEventListener("input", (e) => {
     search(recipes, searchWord)
 })
 
-function createTags(category){
-    let createTag = `${category.map(function(item){
-        return `<li class="tag cursor"> ${item}</li>`
-    }).join('')} `
-    return createTag
+function createTags(list, category){
+    let createTag = list.map(item => `<li class="tag cursor" data-tag-category="${category}"> ${item}</li>`)
+
+    return createTag.join('')
 };
 
 tagContainer.forEach(tagContainer =>{
@@ -166,7 +165,7 @@ tagContainer.forEach(tagContainer =>{
 
         if((tagContainer.classList.contains("active") && tagContainer.classList.contains("blue"))){
             ulTagContent.classList.add("ul_active")
-            ulTagContent.innerHTML = createTags(ingredients)
+            ulTagContent.innerHTML = createTags(ingredients, 'ingredients')
 
             inputIngredient.classList.remove('hidden')
             inputIngredient.focus()
@@ -180,7 +179,7 @@ tagContainer.forEach(tagContainer =>{
                 })
 
                 if(tagsFound.length > 0){
-                    ulTagContent.innerHTML = createTags(tagsFound)
+                    ulTagContent.innerHTML = createTags(tagsFound, 'ingredients')
                 } else {
                     ulTagContent.innerHTML = "Aucuns ingrédients ne correspond à votre recherche"
                 }
@@ -190,7 +189,7 @@ tagContainer.forEach(tagContainer =>{
 
         } else if (tagContainer.classList.contains("active") && tagContainer.classList.contains("green")){
             ulTagContent.classList.add("ul_active")
-            ulTagContent.innerHTML = createTags(appareils)
+            ulTagContent.innerHTML = createTags(appareils, 'appliance')
 
             inputAppareil.classList.remove('hidden')
             inputAppareil.focus()
@@ -204,7 +203,7 @@ tagContainer.forEach(tagContainer =>{
                 })
 
                 if(tagsFound.length > 0){
-                    ulTagContent.innerHTML = createTags(tagsFound)
+                    ulTagContent.innerHTML = createTags(tagsFound, 'appliance')
                 } else {
                     ulTagContent.innerHTML = "Aucuns ingrédients ne correspond à votre recherche"
                 }
@@ -214,7 +213,7 @@ tagContainer.forEach(tagContainer =>{
 
         } else if (tagContainer.classList.contains("active") && tagContainer.classList.contains("red")){
             ulTagContent.classList.add("ul_active")
-            ulTagContent.innerHTML = createTags(ustensils)
+            ulTagContent.innerHTML = createTags(ustensils, 'ustensils')
 
             inputUstensil.classList.remove('hidden')
             inputUstensil.focus()
@@ -228,7 +227,7 @@ tagContainer.forEach(tagContainer =>{
                 })
 
                 if(tagsFound.length > 0){
-                    ulTagContent.innerHTML = createTags(tagsFound)
+                    ulTagContent.innerHTML = createTags(tagsFound, 'ustensils')
                 } else {
                     ulTagContent.innerHTML = "Aucuns ingrédients ne correspond à votre recherche"
                 }
@@ -239,15 +238,86 @@ tagContainer.forEach(tagContainer =>{
     })
 })
 
-function tagCall(color){
+function searchTag(recipeArray, tag, tagCategory) {
+
+    let foundArray = []
+    
+    if(tagCategory == 'ustensils') {
+        foundArray = recipeArray.filter((recipe) => recipe.ustensils.includes(tag))
+    } else if(tagCategory == 'appliance') {
+        foundArray = recipeArray.filter((recipe) => recipe.appliance.toLowerCase() == tag)
+    } else {
+        foundArray = recipeArray.filter((recipe) => {
+            const results = recipe.ingredients.filter(item => item.ingredient.toLowerCase() == tag)
+            console.log('tag: ',tag,'  -  reusltats', results)
+            return results.length ? true : false
+        })
+    }
+
+    if(foundArray.length > 0){
+        recipeContainer.innerHTML = ""
+        ingredientsFilter(foundArray)
+        appareilsFilter(foundArray)
+        ustensilsFilter(foundArray)
+        createRecipe(foundArray)
+    } else {
+        recipeContainer.innerHTML = `<span id="errorMessage">Aucune recette ne correspond à votre critère...vous pouvez chercher 'tarte aux pommes', 'poisson'. etc </span>`
+    }
+
+    foundArrayTemp = foundArray
+}
+
+
+
+
+// {
+//     "id": 1,
+//     "name" : "Limonade de Coco",
+//     "servings" : 1,
+//     "ingredients": [
+//         {
+//             "ingredient" : "Lait de coco",
+//             "quantity" : 400,
+//             "unit" : "ml"
+//         },
+//         {
+//             "ingredient" : "Jus de citron",
+//             "quantity" : 2
+//         },
+//         {
+//             "ingredient" : "Crème de coco",
+//             "quantity" : 2,
+//             "unit" : "cuillères à soupe"
+//         },
+//         {
+//             "ingredient" : "Sucre",
+//             "quantity" : 30,
+//             "unit" : "grammes"
+//         },
+//         {
+//             "ingredient": "Glaçons"
+//         }
+//     ],
+//     "time": 10,
+//     "description": "Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée",
+//     "appliance": "Blender",
+//     "ustensils": ["cuillère à Soupe", "verres", "presse citron" ]
+// },
+
+function tagCall(color) {
+
+    console.log('tagcall appele avec la couleur ', color)
     const tagLi = document.querySelectorAll(".tag")
+  
     
     tagLi.forEach(tag =>{
         tag.addEventListener('click', (e)=>{
             e.preventDefault()
-            let tagSelected = e.target.innerHTML.toLowerCase()
-            tagSelected = tagSelected.trim()
-            
+            const elem = e.target
+            const tagCategory = elem.dataset.tagCategory
+            const tagSelected = elem.innerHTML.toLowerCase().trim()
+    
+        
             if(tagSelected === ""){
                 return
             } else {
@@ -263,9 +333,9 @@ function tagCall(color){
             }
 
             if (foundArrayTemp.length === 0){
-                search(recipes,tagSelected)
+                searchTag(recipes, tagSelected, tagCategory)
             } else {
-                search(foundArrayTemp,tagSelected)
+                searchTag(foundArrayTemp,tagSelected, tagCategory)
             }
             removeSelectedTag()
         })
