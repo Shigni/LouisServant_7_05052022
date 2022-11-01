@@ -269,6 +269,7 @@ h4 i {
     display: inline-block;
     width: 50%;
     margin-right: 0.8rem;
+    line-height: 2.5ex;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -279,6 +280,7 @@ h4 i {
     padding-left: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 2.5ex;
 }
 
 ul {
